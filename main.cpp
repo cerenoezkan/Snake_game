@@ -5,6 +5,20 @@
 
 #define MAX_SNAKE_SIZE 50
 
+using namespace std;
+
+HANDLE konsol = GetStdHandle(STD_OUTPUT_HANDLE);
+COORD imlecKonumu;
+
+ /*  x= x kodinatsistemi
+     y= y kordinatsistemini   temsil ediyor */
+
+void kordinat(int x, int y){  // x ve y ekseni kodinatini çizicek
+   imlecKonumu.X = x; // x kordinat eksenini temsil eder
+   imlecKonumu.Y = y; // y kordinat  eksenini temsil eder
+    SetConsoleCursorPosition(konsol, imlecKonumu); // imleckonumunu konsola atiyor
+}
+
 int main() {
 
 
