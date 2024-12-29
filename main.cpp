@@ -27,6 +27,39 @@ public:
     virtual void sil() = 0;   //silmek için gerekli metod
 };
 
+// Point Class - Snake için
+class Point1 : public Object {
+private:
+    int x, y;  // X ve Y koordinatları
+public:
+    Point1(int x = 30, int y = 30) : x(x), y(y) {}
+
+    int GetX() { return x; }  // X koordinatını al
+    int GetY() { return y; }  // Y koordinatını al
+
+    void SetPoint(int x, int y) { this->x = x; this->y = y; }  
+
+    void ciz() override {  // X ve Y koordinatlarında bir * çizer
+        kordinat(x, y);
+        cout << "*";
+    }
+
+    void sil() override {  // X ve Y koordinatındaki *'yi siler
+        kordinat(x, y);
+        cout << " ";
+    }
+
+    void MoveUp() { y--; }    // Yılanı yukarı hareket ettir
+    void MoveDown() { y++; }  // Yılanı aşağı hareket ettir
+    void MoveLeft() { x--; }  // Yılanı sola hareket ettir
+    void MoveRight() { x++; } // Yılanı sağa hareket ettir
+
+    void Pozisyon_kopyalama(Point1* p) {
+        p->x = x;
+        p->y = y;
+    }
+};
+
 int main() {
 
 
