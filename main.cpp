@@ -60,6 +60,30 @@ public:
     }
 };
 
+// Point2 Class - Meyve için
+class Point2 : public Object {
+private:
+    int x, y;  // X ve Y koordinatları
+public:
+    Point2(int x = 30, int y = 30) : x(x), y(y) {}
+
+    int GetX() { return x; }  // X koordinatını al
+    int GetY() { return y; }  // Y koordinatını al
+
+    void SetPoint(int x, int y) { this->x = x; this->y = y; }  // X ve Y'yi ayarla
+
+    void ciz() override {  // Meyveyi X ve Y koordinatında çizer
+        kordinat(x, y);
+        cout << "*";
+    }
+
+    void sil() override {  // Meyveyi X ve Y koordinatındaki *'yi siler
+        kordinat(x, y);
+        cout << " ";
+    }
+
+};
+
 int main() {
 
 
