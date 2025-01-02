@@ -83,6 +83,24 @@ public:
     }
 
 };
+// Fruit Class - Meyve
+class Fruit : public Object {
+private:
+    Point2 point2;  // Point2 sınıfı burada bir üye değişken olarak tanımlanıyor
+public:
+    Fruit(int x, int y) : point2(x, y) {}
+
+    void ciz() override { point2.ciz(); }
+    void sil() override { point2.sil(); }
+
+    int GetX() { return point2.GetX(); }
+    int GetY() { return point2.GetY(); }
+
+    void Yer_degistir() {
+        point2.SetPoint(rand() % 50, rand() % 25);  // Meyveyi rastgele bir yere taşır 
+    }
+};
+
 
 int main() {
 
