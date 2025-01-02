@@ -101,6 +101,36 @@ public:
     }
 };
 
+// Snake Class - Yılan
+class Snake : public Object {
+private:
+    Point1* govde[MAX_SNAKE_SIZE];  // Yılanın vücut kısmı
+    int size;  // Yılanın boyutu
+    char yon;  // Yılanın yönü
+
+public:
+    Snake() {
+        size = 1;  // Yılanın başlangıç boyutu
+        govde[0] = new Point1(50, 10);  // Yılanın başı için kullanılan başlangıç konumu 
+        for (int i = 1; i < MAX_SNAKE_SIZE; i++) {
+            //döngü i = 1'den başlıyor ve yılanın yalnızca gövde hücrelerini temizlemek için çalışıyor. Gövde henüz olmadığı için bu elemanlara başlangıçta NULL atanıyor.
+            govde[i] = NULL;  // Diğer parçalar başlangıçta boş
+        }
+        yon = 'd'; //yılanın oyun başladığında otomatik olarak sağa doğru hareket etmesini sağlar.
+    }
+
+    void Hucre_ekle(int x, int y) {
+        if (size < MAX_SNAKE_SIZE) {
+            govde[size++] = new Point1(x, y);  // Yılanın boyutunu artır
+        }
+    }
+
+
+    void TurnUp() { yon = 'w'; }
+    void TurnDown() { yon = 's'; }
+    void TurnLeft() { yon = 'a'; }
+    void TurnRight() { yon = 'd'; }
+
 
 int main() {
 
