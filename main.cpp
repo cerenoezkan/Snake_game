@@ -132,6 +132,51 @@ public:
     void TurnRight() { yon = 'd'; }
 
 
+    void Hareket_etme() {
+        system("cls");
+        //yılanın gövdesini baştan kuyruğa doğru hareket ettirir.
+        for (int i = size - 1; i > 0; i--) { //her hücre konumunu bir önceki hücreye atar Örneğin, body[1] (ikinci hücre) pozisyonunu body[0] (ilk hücre) yapar.
+            govde[i - 1]->Pozisyon_kopyalama(govde[i]);
+        }
+
+        // Yılanın başını yönüne göre hareket ettir
+        switch (yon) {
+            case 'w': govde[0]->MoveUp(); break;
+            case 's': govde[0]->MoveDown(); break;
+            case 'a': govde[0]->MoveLeft(); break;
+            case 'd': govde[0]->MoveRight(); break;
+        }
+    }
+
+    void ciz() override {
+        for (int i = 0; i < size; i++) {
+            govde[i]->ciz();  // Yılanın her parçasını çizer
+        }
+    }
+
+    void sil() override {
+        for (int i = 0; i < size; i++) {
+            govde[i]->sil();  // Yılanın her parçasını siler
+        }
+    }
+
+    void Carpma_kontrolu(Fruit& fruit, int& score) { //Çarpışma Kontrolü
+    //Yılanın başının (body[0]) koordinatları ile meyvenin koordinatlarını karşılaştırıyor./
+        if (fruit.GetX() == govde[0]->GetX() && fruit.GetY() == govde[0]->GetY()) {
+            Hucre_ekle(0, 0);  /*Kod, yılanın yediği meyve sonucunda büyümesini sağlamak için çalışıyor.
+             Yılanın boyu uzadığında, gövdesine bir hücre ekleniyor.
+             Ancak bu yeni hücre, başlangıçta yılanın hareketine tam olarak uyum sağlayacak şekilde doğru bir pozisyonda değil.
+             Bu yüzden geçici bir başlangıç konumu atanıyor.*/ 
+            fruit.Yer_degistir();  // Meyve yeni bir konum alır
+            score += 10;  // Skoru artırır
+        }
+    }
+
+    int GetSize() { return size; }
+    int GetGovdeX(int index) { return govde[index]->GetX(); }
+    int GetGovdeY(int index) { return govde[index]->GetY(); }
+};
+
 int main() {
 
 
