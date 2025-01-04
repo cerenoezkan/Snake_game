@@ -158,6 +158,22 @@ void Hareket_etme() {
             govde[i]->sil();  // Yılanın her parçasını siler
         }
     }
+    void Carpma_kontrolu(Fruit& fruit, int& score) { //Çarpışma Kontrolü
+    /*Yılanın başının (body[0]) koordinatları ile meyvenin koordinatlarını karşılaştırıyor.*/
+        if (fruit.GetX() == govde[0]->GetX() && fruit.GetY() == govde[0]->GetY()) {
+            Hucre_ekle(0, 0);  /*Kod, yılanın yediği meyve sonucunda büyümesini sağlamak için çalışıyor.
+             Yılanın boyu uzadığında, gövdesine bir hücre ekleniyor.
+             Ancak bu yeni hücre, başlangıçta yılanın hareketine tam olarak uyum sağlayacak şekilde doğru bir pozisyonda değil.
+             Bu yüzden geçici bir başlangıç konumu atanıyor.*/ 
+            fruit.Yer_degistir();  // Meyve yeni bir konum alır
+            score += 10;  // Skoru artırır
+        }
+    }
+
+    int GetSize() { return size; }
+    int GetGovdeX(int index) { return govde[index]->GetX(); }
+    int GetGovdeY(int index) { return govde[index]->GetY(); }
+};
 int main() {
 
 
