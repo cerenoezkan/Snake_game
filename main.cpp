@@ -212,7 +212,7 @@ public:
             if (kbhit()) { /*özel bir fonksiyondur ve genellikle konsol tabanlı oyunlarda, 
                 kullanıcıdan gelen tuş girişlerini anlık olarak almak için kullanılır.*/
                 k = getch(); //getch() fonksiyonu, tuşu okur ve kullanıcının basmış olduğu tuşun ASCII değerini döner.
-                /Bu kombinasyon, özellikle "beklemeden" kullanıcının girişini alabilmek için kullanılır./
+                /*Bu kombinasyon, özellikle "beklemeden" kullanıcının girişini alabilmek için kullanılır.*/
             }
 
             switch (k) {
@@ -247,7 +247,9 @@ public:
 };
 
 int main() {
-    // Oyun fonksiyonlarını buraya ekleyebilirsiniz.
+    srand((unsigned)time(NULL));
 
+    Game g;
+    g.Start(); /* oyun GAME  classinin içindeki start fonksiyonunu  calıstırarak  oluşturuyor  */
     return 0;
 }
