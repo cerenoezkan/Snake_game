@@ -1,6 +1,6 @@
 #include <iostream>
 #include <conio.h>
-#include <windows.h> /* HANDLE konsol = GetStdHandle(STD_OUTPUT_HANDLE); COORD imlecKonumu;*/
+#include <windows.h>
 #include <time.h>
 
 #define MAX_SNAKE_SIZE 50
@@ -10,21 +10,21 @@ using namespace std;
 HANDLE konsol = GetStdHandle(STD_OUTPUT_HANDLE);
 COORD imlecKonumu;
 
- /*  x= x kodinatsistemi
-     y= y kordinatsistemini   temsil ediyor */
+/*  x= x koordinat sistemi
+    y= y koordinat sistemini temsil ediyor */
 
-void kordinat(int x, int y){  // x ve y ekseni kodinatini çizicek
-   imlecKonumu.X = x; // x kordinat eksenini temsil eder
-   imlecKonumu.Y = y; // y kordinat  eksenini temsil eder
-   SetConsoleCursorPosition(konsol, imlecKonumu); // imleckonumunu konsola atiyor
+void kordinat(int x, int y){  // x ve y ekseninde koordinat çizecek
+    imlecKonumu.X = x; // x koordinat eksenini temsil eder
+    imlecKonumu.Y = y; // y koordinat eksenini temsil eder
+    SetConsoleCursorPosition(konsol, imlecKonumu); // imlec konumunu konsola atar
 }
 
-//ANA CLASS YAPISI 
-class Object {   // soyut bir class tanimladim
+// ANA CLASS YAPISI
+class Object {   // Soyut bir class tanımladım
 public:
-    //Polymorphism kullandık
-    virtual void ciz() = 0;  //çizmek için gerekli metod
-    virtual void sil() = 0;   //silmek için gerekli metod
+    // Polymorphism kullandık
+    virtual void ciz() = 0;  // Çizmek için gerekli metod
+    virtual void sil() = 0;   // Silmek için gerekli metod
 };
 
 // Point Class - Snake için
@@ -81,8 +81,8 @@ public:
         kordinat(x, y);
         cout << " ";
     }
-
 };
+
 // Fruit Class - Meyve
 class Fruit : public Object {
 private:
@@ -111,12 +111,12 @@ private:
 public:
     Snake() {
         size = 1;  // Yılanın başlangıç boyutu
-        govde[0] = new Point1(50, 10);  // Yılanın başı için kullanılan başlangıç konumu 
+        govde[0] = new Point1(50, 10);  // Yılanın başı için başlangıç konumu 
         for (int i = 1; i < MAX_SNAKE_SIZE; i++) {
-            //döngü i = 1'den başlıyor ve yılanın yalnızca gövde hücrelerini temizlemek için çalışıyor. Gövde henüz olmadığı için bu elemanlara başlangıçta NULL atanıyor.
+            // Döngü i = 1'den başlıyor ve yılanın yalnızca gövde hücrelerini temizlemek için çalışıyor.
             govde[i] = NULL;  // Diğer parçalar başlangıçta boş
         }
-        yon = 'd'; //yılanın oyun başladığında otomatik olarak sağa doğru hareket etmesini sağlar.
+        yon = 'd'; // Yılanın oyun başladığında otomatik olarak sağa doğru hareket etmesini sağlar.
     }
 
     void Hucre_ekle(int x, int y) {
@@ -125,17 +125,15 @@ public:
         }
     }
 
-
     void TurnUp() { yon = 'w'; }
     void TurnDown() { yon = 's'; }
     void TurnLeft() { yon = 'a'; }
     void TurnRight() { yon = 'd'; }
 
-
     void Hareket_etme() {
         system("cls");
-        //yılanın gövdesini baştan kuyruğa doğru hareket ettirir.
-        for (int i = size - 1; i > 0; i--) { //her hücre konumunu bir önceki hücreye atar Örneğin, body[1] (ikinci hücre) pozisyonunu body[0] (ilk hücre) yapar.
+        // Yılanın gövdesini baştan kuyruğa doğru hareket ettirir.
+        for (int i = size - 1; i > 0; i--) { // Her hücre konumunu bir önceki hücreye atar
             govde[i - 1]->Pozisyon_kopyalama(govde[i]);
         }
 
@@ -160,13 +158,9 @@ public:
         }
     }
 
-    void Carpma_kontrolu(Fruit& fruit, int& score) { //Çarpışma Kontrolü
-    //Yılanın başının (body[0]) koordinatları ile meyvenin koordinatlarını karşılaştırıyor./
+    void Carpma_kontrolu(Fruit& fruit, int& score) { // Çarpışma Kontrolü
         if (fruit.GetX() == govde[0]->GetX() && fruit.GetY() == govde[0]->GetY()) {
-            Hucre_ekle(0, 0);  /*Kod, yılanın yediği meyve sonucunda büyümesini sağlamak için çalışıyor.
-             Yılanın boyu uzadığında, gövdesine bir hücre ekleniyor.
-             Ancak bu yeni hücre, başlangıçta yılanın hareketine tam olarak uyum sağlayacak şekilde doğru bir pozisyonda değil.
-             Bu yüzden geçici bir başlangıç konumu atanıyor.*/ 
+            Hucre_ekle(0, 0);  // Yılanın büyümesini sağlar
             fruit.Yer_degistir();  // Meyve yeni bir konum alır
             score += 10;  // Skoru artırır
         }
@@ -178,8 +172,6 @@ public:
 };
 
 int main() {
-
-
-
+    // Oyun fonksiyonlarını buraya ekleyebilirsiniz.
     return 0;
 }
