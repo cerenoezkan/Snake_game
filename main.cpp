@@ -171,7 +171,83 @@ public:
     int GetGovdeY(int index) { return govde[index]->GetY(); }
 };
 
+// Game Control Class
+class Game {
+
+private:
+    Snake snake;
+    Fruit fruit;
+    int score;  
+
+public:
+    Game() : fruit(rand() % 50, rand() % 25), score(0) {}
+
+    void PrintScore() {
+        kordinat(0, 0); 
+        cout << "Score: " << score;
+    }
+
+    void GameOver() {
+        kordinat(20, 12);
+        cout << "Game Over! Skorun: " << score << endl;
+        kordinat(20, 13);
+        cout << "Cikmak icin 'e' ye bas.";
+    }
+
+    void SetColor(int textColor, int backgroundColor) {
+    // Konsol ekranının handle'ını al
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    // Renk ayarlarını yap
+    SetConsoleTextAttribute(hConsole, (backgroundColor << 4) | textColor);
+}
+
+     void Start() {
+
+        char k = NULL;
+
+        do {
+              SetColor(7,4); //Arka plan rengini ayarlamak için kullandık 
+
+            if (kbhit()) { /*özel bir fonksiyondur ve genellikle konsol tabanlı oyunlarda, 
+                kullanıcıdan gelen tuş girişlerini anlık olarak almak için kullanılır.*/
+                k = getch(); //getch() fonksiyonu, tuşu okur ve kullanıcının basmış olduğu tuşun ASCII değerini döner.
+                /Bu kombinasyon, özellikle "beklemeden" kullanıcının girişini alabilmek için kullanılır./
+            }
+
+            switch (k) {
+                case 'w': case 'W': snake.TurnUp(); break;
+                case 's': case 'S': snake.TurnDown(); break;
+                case 'a': case 'A': snake.TurnLeft(); break;
+                case 'd': case 'D': snake.TurnRight(); break;
+            }
+
+            snake.Hareket_etme();
+            snake.Carpma_kontrolu(fruit, score);
+            snake.ciz();
+            fruit.ciz();
+            PrintScore();
+
+            // Yılanın Kendisiyle Çarpışmasını Kontrol Etme
+            for (int i = 1; i < snake.GetSize(); i++) {
+                /*Bu döngü, yılanın başının (body[0]) vücudunun geri kalanıyla çarpışıp çarpışmadığını kontrol eder.
+                Eğer yılanın başı, vücudundaki herhangi bir parça ile aynı konumda ise, bu bir çarpışma anlamına gelir ve oyun biter.*/
+                if (snake.GetGovdeX(0) == snake.GetGovdeX(i) && snake.GetGovdeY(0) == snake.GetGovdeY(i)) {
+                    GameOver();
+                    return;
+                }
+            }
+
+            Sleep(800); //Bu satır, her döngüde (her karede) yılanın hareketini biraz yavaşlatır.
+            //Daha küçük bir değer, oyunu çok hızlı hale getirir. Daha büyük bir değer ise oyunun hızını düşürür.
+        } while (k != 'e');  // Döngü e tuşuna basılana kadar devam eder
+
+    }
+
+};
+
 int main() {
     // Oyun fonksiyonlarını buraya ekleyebilirsiniz.
+
     return 0;
 }
