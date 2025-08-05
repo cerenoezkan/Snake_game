@@ -1,12 +1,22 @@
-# Snake_game
-Snake Game - C++
-This project is a classic Snake game developed in C++ using Object-Oriented Programming (OOP) principles. The game includes basic features such as snake growth, eating fruits, colliding with itself, and tracking the score. The user can control the snake using arrow keys.
+# 🐍 Snake Game in C++
 
-Technologies Used
+🎮 A classic Snake game built with C++ using OOP principles.
+## 🚀 Features
 
--C++
--Object-Oriented Programming (OOP)
--Console Application
+- Move snake with arrow keys
+- Eat fruit to grow
+- Score tracking
+- Game over on self-collision
+
+## 🛠️ Technologies
+
+- C++
+- Object-Oriented Programming (OOP)
+- Console-based game
+
+## 📸 Screenshots
+
+![snake preview](https://user-images.githubusercontent.com/00000000/snake-game.gif)
 
 Project Features
 
