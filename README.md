@@ -16,7 +16,7 @@
 
 ## 📸 Screenshots
 
-![snake preview](https://user-images.githubusercontent.com/00000000/snake-game.gif)
+![snake preview]([https://user-images.githubusercontent.com/00000000/snake-game.gif](https://github.com/user-attachments/assets/4a82ae05-5a2b-4628-92cc-ac85a3a72413))
 
 Project Features
 
