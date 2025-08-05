@@ -16,7 +16,7 @@
 
 ## 📸 Screenshots
 
-![snake preview](images/snake_preview.png)
+![snake preview](snake_preview.png)
 
 ## ✨ Project Features
 
